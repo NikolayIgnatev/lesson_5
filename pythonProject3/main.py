@@ -4,41 +4,49 @@ import file_operations
 from faker import Faker
 
 
-def get_cards(skills,letters,folder_name):
+def get_cards(skills, letters, folder_name):
     for number in range(10):
         replaced_skills = []
-        selected_skills = random.sample(skills,3)
+        selected_skills = random.sample(skills, 3)
         for skill in selected_skills:
             for letter in skill:
-                skill = skill.replace(letter,letters[letter])
+                skill = skill.replace(letter, letters[letter])
             replaced_skills.append(skill)
         skill_one = replaced_skills[0]
         skill_two = replaced_skills[1]
         skill_three = replaced_skills[2]
 
         fake = Faker('ru_RU')
-        (fake.first_name())
         context = {
-          "first_name":(fake.first_name()),
-          'last_name':(fake.last_name()),
-          'job':(fake.job()),
-          'town':(fake.city()),
-          'strength':random.randint(3,18),
-          'agility':random.randint(3,18),
-          'endurance':random.randint(3,18),
-          'intelligence':random.randint(3,18),
-          'luck':random.randint(3,18),
-          'skill_1':skill_one,
-          'skill_2':skill_two,
-          'skill_3':skill_three
-      }
+          "first_name": fake.first_name(),
+          'last_name': fake.last_name(),
+          'job': fake.job(),
+          'town': fake.city(),
+          'strength': random.randint(3, 18),
+          'agility': random.randint(3, 18),
+          'endurance': random.randint(3, 18),
+          'intelligence': random.randint(3, 18),
+          'luck': random.randint(3, 18),
+          'skill_1': skill_one,
+          'skill_2': skill_two,
+          'skill_3': skill_three
+        }
 
+        file_operations.render_template("card.svg",
+                                    f"{folder_name}/result_{number}.svg",
+                                    context)
 
-        file_operations.render_template("card.svg", f"{folder_name}/result_{number}.svg", context)
 
 def main():
-    skills = ['Стремительный прыжок', 'Электрический выстрел', 'Ледяной удар', 'Стремительный удар', 'Кислотный взгляд'
-        , 'Тайный побег', 'Ледяной выстрел', 'Огненный заряд']
+        'Стремительный прыжок',
+        'Электрический выстрел',
+        'Ледяной удар',
+        'Стремительный удар',
+        'Кислотный взгляд',
+        'Тайный побег',
+        'Ледяной выстрел',
+        'Огненный заряд'
+    ]
     letters = {
         'а': 'а͠', 'б': 'б̋', 'в': 'в͒͠',
         'г': 'г͒͠', 'д': 'д̋', 'е': 'е͠',
@@ -65,9 +73,9 @@ def main():
         ' ': ' '
     }
     folder_name = 'cards'
-    if not os.path.isdir(folder_name):
-        os.mkdir(folder_name)
+    os.makedirs(folder_name, exist_ok = True)
     get_cards(skills, letters, folder_name)
+
 
 if __name__ == '__main__':
     main()
