@@ -38,6 +38,7 @@ def get_cards(skills, letters, folder_name):
 
 
 def main():
+    skills = [
         'Стремительный прыжок',
         'Электрический выстрел',
         'Ледяной удар',
