@@ -18,18 +18,18 @@ def get_cards(skills, letters, folder_name):
 
         fake = Faker('ru_RU')
         context = {
-          "first_name": fake.first_name(),
-          'last_name': fake.last_name(),
-          'job': fake.job(),
-          'town': fake.city(),
-          'strength': random.randint(3, 18),
-          'agility': random.randint(3, 18),
-          'endurance': random.randint(3, 18),
-          'intelligence': random.randint(3, 18),
-          'luck': random.randint(3, 18),
-          'skill_1': skill_one,
-          'skill_2': skill_two,
-          'skill_3': skill_three
+            "first_name": fake.first_name(),
+            'last_name': fake.last_name(),
+            'job': fake.job(),
+            'town': fake.city(),
+            'strength': random.randint(3, 18),
+            'agility': random.randint(3, 18),
+            'endurance': random.randint(3, 18),
+            'intelligence': random.randint(3, 18),
+            'luck': random.randint(3, 18),
+            'skill_1': skill_one,
+            'skill_2': skill_two,
+            'skill_3': skill_three
         }
 
         file_operations.render_template("card.svg",
